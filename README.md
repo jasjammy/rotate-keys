@@ -1,4 +1,4 @@
-# Cover Interview Assignment
+# Rotate Keys Assignment
 
 For your take home assignment, you'll be extending an encrypted data store for strings. Clients post string that they want stored encrypted to the `encrypted_strings` path and receive a token that they can use to later retrieve the string. Clients may also delete a previously decrypted string using their token. 
 
