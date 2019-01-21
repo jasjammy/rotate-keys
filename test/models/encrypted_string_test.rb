@@ -28,13 +28,10 @@ class EncryptedStringTest < ActiveSupport::TestCase
             value: "decrypted string",
             data_encrypting_key_id:primary_key.id
         )
-    primary_key.primary = false
-    primary_key.save
+    primary_key.update_attributes!(primary: false)
     encrypted_value = es.encrypted_value
     another_primary_key = DataEncryptingKey.generate!(primary: true)
-    another_primary_key.save
     assert_not_same another_primary_key.key, es.encryption_key
-
     assert es.reencrypt!(another_primary_key)
     assert_equal another_primary_key.key, es.encryption_key
     assert_not_equal encrypted_value, es.encrypted_value
