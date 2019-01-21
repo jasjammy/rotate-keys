@@ -35,7 +35,7 @@ class EncryptedStringTest < ActiveSupport::TestCase
     another_primary_key.save
     assert_not_same another_primary_key.key, es.encryption_key
 
-    assert es.rencrypt!(another_primary_key)
+    assert es.reencrypt!(another_primary_key)
     assert_equal another_primary_key.key, es.encryption_key
     assert_not_equal encrypted_value, es.encrypted_value
   end

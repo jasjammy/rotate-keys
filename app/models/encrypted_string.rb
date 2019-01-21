@@ -16,7 +16,7 @@ class EncryptedString < ActiveRecord::Base
     data_encrypting_key.key
   end
 
-  def rencrypt!(new_key)
+  def reencrypt!(new_key)
     update_attributes!(data_encrypting_key: new_key, value: value)
   end
 
