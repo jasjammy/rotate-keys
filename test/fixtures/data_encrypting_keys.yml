@@ -2,8 +2,15 @@
 
 one:
   encrypted_key: MyString
+  encrypted_key_iv: MyIv
   primary: false
 
 two:
   encrypted_key: MyString
+  encrypted_key_iv: MyIv
+  primary: false
+
+three:
+  encrypted_key: MyprimaryString
+  encrypted_key_iv: MyIv
   primary: false
