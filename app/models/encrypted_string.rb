@@ -3,7 +3,7 @@ class EncryptedString < ActiveRecord::Base
 
   attr_encrypted :value,
                  mode: :per_attribute_iv_and_salt,
-                 key: :primary_encryption_key
+                 key: :encryption_key
 
   validates :token, presence: true, uniqueness: true
   validates :data_encrypting_key, presence: true
@@ -11,17 +11,16 @@ class EncryptedString < ActiveRecord::Base
 
   before_validation :set_token, :set_data_encrypting_key
 
-  def primary_encryption_key
-    self.data_encrypting_key ||= DataEncryptingKey.primary
-    data_encrypting_key.encrypted_key
+  def encryption_key
+    set_data_encrypting_key if data_encrypting_key.nil?
+    data_encrypting_key.key
+  end
+
+  def rencrypt!(new_key)
+    update_attributes!(data_encrypting_key: new_key, value: value)
   end
 
   private
-
-  def encryption_key
-    self.data_encrypting_key ||= DataEncryptingKey.primary
-    data_encrypting_key.key
-  end
 
   def set_token
     begin
